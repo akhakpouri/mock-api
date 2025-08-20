@@ -13,14 +13,22 @@ func TestWallet(t *testing.T) {
 		}
 
 	}
+	printError := func(t testing.TB, err error) {
+		t.Helper()
+		if err == nil {
+			t.Error("wanter an error but didn't get one")
+		}
+	}
 	t.Run("Deposit", func(t *testing.T) {
 		wallet := Wallet{}
 		wallet.Deposit(Bitcoin(10))
 		printBalance(t, wallet, Bitcoin(10))
 	})
 	t.Run("Withdraw", func(t *testing.T) {
-		wallet := Wallet{balance: Bitcoin(20)}
-		wallet.Withdraw(Bitcoin(10))
-		printBalance(t, wallet, Bitcoin(10))
+		balance := Bitcoin(20)
+		wallet := Wallet{balance: balance}
+		err := wallet.Withdraw(Bitcoin(100))
+		printError(t, err)
+		printBalance(t, wallet, balance)
 	})
 }
