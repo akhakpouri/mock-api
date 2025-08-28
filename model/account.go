@@ -6,7 +6,6 @@ type Account struct {
 	Id        int       `json:"id"`
 	Name      string    `json:"name"`
 	BirthDate time.Time `json:"birthDate"`
-	age       int
 }
 
 func GetAge(birth time.Time) int {
