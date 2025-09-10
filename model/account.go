@@ -1,6 +1,10 @@
 package model
 
-import "time"
+import (
+	"bytes"
+	"fmt"
+	"time"
+)
 
 type Account struct {
 	Id        int       `json:"id"`
@@ -15,4 +19,16 @@ func GetAge(birth time.Time) int {
 		years--
 	}
 	return years
+}
+
+func Greet(writer *bytes.Buffer, name string) {
+	fmt.Fprintf(writer, "hello, %s", name)
+}
+
+func (a *Account) PrintHi(message string) string {
+	return fmt.Sprintf("Hello %s - %s", a.Name, message)
+}
+
+func NewAccount(acc Account) Account {
+	return Account{Id: acc.Id, Name: acc.Name, BirthDate: acc.BirthDate}
 }
