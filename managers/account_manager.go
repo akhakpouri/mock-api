@@ -12,6 +12,30 @@ func SayHi(acct model.Account) {
 	fmt.Println(msg)
 }
 
+func AlwaysSayHi() {
+	names := []string{
+		"Ali",
+		"Bob",
+		"Jon",
+		"Ben",
+		"Nell",
+		"Alec",
+	}
+	channel := make(chan model.Account)
+
+	for name := range names {
+		go func() {
+			acct := model.Account{Name: names[name]}
+			channel <- acct
+		}()
+	}
+
+	for range names {
+		r := <-channel
+		SayHi(r)
+	}
+}
+
 func newAccount(name string) model.Account {
 	id := rand.Intn(100)
 	year := 1984
