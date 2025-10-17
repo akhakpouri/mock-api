@@ -4,7 +4,7 @@ import (
 	"testing"
 )
 
-func TestXxx(t *testing.T) {
+func TestWalker(t *testing.T) {
 	expect := "Ali"
 	got := []string{}
 
